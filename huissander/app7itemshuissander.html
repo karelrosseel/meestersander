@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="nl">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/huissander7items/css/style.css">
+        <title>huissander 7 items</title>
+        <script type=module>
+        import zim from "https://zimjs.org/cdn/017/zim_pizzazz";
+new Frame(FIT, 1280, 720, white, black, ready);
+function ready() {
+  
+  var speech = new Speech();
+  
+  F.color=white;
+
+  F.loadAssets("gf_Roboto", "gf_Chewy");
+  F.on("complete",()=>{
+    STYLE = {font:"Roboto"}
+    
+
+    // new Pic("https://raw.githubusercontent.com/karelrosseel/meestersander/master/huissander/huiskamer/tikketakke-huissander-witteitems-gelevloer.png").pos(0,0,CENTER,CENTER).alp(.5);
+  
+    new Pic("https://raw.githubusercontent.com/karelrosseel/meestersander/master/huissander/huiskamer/tikketakke-2p1280x720-gelevloer.png",1280,720).pos(0,0,CENTER,CENTER).alp(.1);
+    
+   new Pic("https://raw.githubusercontent.com/karelrosseel/meestersander/master/huissander/huiskamer/overlay-huissander-transitems-transvloer.png",1280,720).pos(0,0,CENTER,CENTER) 
+    new Pic("https://raw.githubusercontent.com/karelrosseel/meestersander/master/huissander/huiskamer/overlay-huissander-transitems-gelevloer.png",1280,720).pos(0,0,CENTER,CENTER) 
+     
+
+    const textLabel = new Label({text:"In het slimme huis van meester Sander.\nDit is het slimme huis van meester Sander\nvol apparaten die praten en spelen.\nScan de code en luister naar meester Sander.", font:"Chewy", size:20, color:white}).pos(10,50,LEFT,TOP).tap(()=>{speech.talk("textLabel")});
+    
+const listbox =  new Rectangle({width:1000, height:120, color:blue, borderColor:white, borderWidth:3, corner:20}).pos(20,5,LEFT,BOTTOM);
+ /////
+    
+    const oBtn = new Button(AUTO,AUTO,"o", blue).pos(100,10,RIGHT,BOTTOM).tap(()=>{listbox.alp(1); xBtn.alp(1); oBtn.alp(0); S.update()})
+  const xBtn =  new Button(AUTO,AUTO,"X",blue).pos(100,10,RIGHT,BOTTOM).tap(()=>{listbox.alp(0); oBtn.alp(1); xBtn.alp(0); S.update()})
+  
+  
+  ////////////////:
+     const tBtn = new Button(AUTO,AUTO,"?", white,white,white,black,black,black).pos(170,10,RIGHT,BOTTOM).tap(()=>{
+      babyfooncameraBtn.alp(1);
+      telefoonBtn.alp(1);
+      tabletBtn.alp(1);
+      deurbelBtn.alp(1);
+      cameraBtn.alp(1);
+      schermkoelkastBtn.alp(1);
+      oplaadstationBtn.alp(1);
+       
+       xtBtn.alp(1); tBtn.alp(0); S.update()})
+  const xtBtn =  new Button(AUTO,AUTO,"x",white,white,white,black,black,black).pos(170,10,RIGHT,BOTTOM).tap(()=>{
+      babyfooncameraBtn.alp(0);
+      telefoonBtn.alp(0);
+      tabletBtn.alp(0);
+      deurbelBtn.alp(0);
+      cameraBtn.alp(0);
+      schermkoelkastBtn.alp(0);
+      oplaadstationBtn.alp(0);
+    tBtn.alp(1); xtBtn.alp(0); S.update()})
+  
+  
+  ///////////////////////////////////////
+STYLE = {button:{shadowColor:clear}}
+const titleBtn =  new Button(AUTO,70,"klik en luister, zoek en plaats object").sca(.5).pos(5,5,LEFT,TOP).tap(()=>{window.location.reload("Refresh")});
+  
+  makeIcon("sound",white,1).pos(320, 10,LEFT,TOP).tap(()=>{speech.talk("klik en luister, zoek en plaats object, In het slimme huis van meester Sander.\nDit is het slimme huis van meester Sander\nvol apparaten die praten en spelen.\nScan de code en luister naar meester Sander." )})
+
+
+	// we could use the type property of shape to do matching
+	// but often, with matching there needs to be a unique
+	// so we show how we can do that with a match property
+
+	STYLE = {
+		color:faint,
+		borderColor:dark,
+		borderWidth:3,
+		centerReg:{add:false},
+		clone:false // important to keep custom match property when making Tile
+	}
+
+	// these are what we drag
+	var objectsList = [
+		new Rectangle(120,100,clear,clear).expand(0), //babyfoon
+		new Rectangle(120,100,clear,clear).expand(0), // tablet
+		new Rectangle(120,100,clear,clear).expand(0), //phone
+    new Rectangle(100,100,clear,clear).expand(0), //camera
+    new Rectangle(120,100,clear,clear).expand(0), ///  much items be as pictures
+    new Rectangle(100,100,clear,clear).expand(0), //camera
+    new Rectangle(120,100,clear,clear).expand(0) /// there must as much items be as pictures
+	];
+	
+ PATH = "https://raw.githubusercontent.com/karelrosseel/meestersander/master/huissander/items/";
+    
+    
+const babyfooncamera = new Pic("babyfooncamera.png").sca(.8).cur().center(objectsList[0]).sha();
+const babyfooncameraBtn = new Button({width:AUTO, height:AUTO, label:"babyfooncamera", color:black,bgColor:white}).sca(.4).pos(0,-20,CENTER,BOTTOM,objectsList[0])
+   
+const telefoon = new Pic("phone.png").siz(60).cur().center(objectsList[1]).sha();
+const telefoonBtn = new Button({width:AUTO, height:AUTO, label:"telefoon", color:black,bgColor:white}).sca(.4).pos(0,-20,CENTER,BOTTOM,objectsList[1]);
+ 
+const tablet = new Pic("tablet-z.png").sca(.8).cur().center(objectsList[2]).sha();
+const tabletBtn = new Button({width:AUTO, height:AUTO, label:"tablet", color:black,bgColor:white}).sca(.4).pos(0,-20,CENTER,BOTTOM,objectsList[2]);  
+    
+const camera = new Pic("camera.png").sca(.8).cur().center(objectsList[3]).sha();
+const cameraBtn = new Button({width:AUTO, height:AUTO, label:"camera", color:black,bgColor:white}).sca(.4).pos(0,-20,CENTER,BOTTOM,objectsList[3]);
+  
+const deurbel = new Pic("deurbel.png").sca(.8).cur().center(objectsList[4]).sha();
+const deurbelBtn = new Button({width:AUTO, height:AUTO, label:"deurbel", color:black,bgColor:white}).sca(.4).pos(0,-20,CENTER,BOTTOM,objectsList[4]);
+    
+    const schermkoelkast = new Pic("schermkoelkast.png").sca(.8).cur().center(objectsList[5]).sha();
+const schermkoelkastBtn = new Button({width:AUTO, height:AUTO, label:"scherm", color:black,bgColor:white}).sca(.4).pos(0,-20,CENTER,BOTTOM,objectsList[5]);
+    
+     const oplaadstation = new Pic("oplaadstation.png").sca(.8).cur().center(objectsList[6]).sha();
+const oplaadstationBtn = new Button({width:AUTO, height:AUTO, label:"oplaadstation", color:black,bgColor:white}).sca(.4).pos(0,-20,CENTER,BOTTOM,objectsList[6]);
+ 
+    
+    
+    
+    
+    
+    
+	// these are what we drag to
+	STYLE = {
+		color:pink,
+		borderColor:dark,
+		borderWidth:3,
+		clone:false // important to keep custom match property when making Tile
+	}
+	
+	// add targets to a Container
+	var targets = new Container(W, H).pos(0,0,CENTER,CENTER);
+	
+	// var targetsList = [
+	// 	new Rectangle().centerReg(targets).loc(200, 200),
+	// 	new Circle().centerReg(targets).loc(800, 200),
+	// 	new Triangle(110,110,110).centerReg(targets).loc(200, 400)
+	// ];
+	
+    new Grid();
+	var targetsList = [
+		new Rectangle({width:170, height:140, color:clear, borderColor:red, dashed:true}).centerReg(targets).loc(111, 470).expand(0).cur(), // babyfooncamera
+		new Rectangle({width:50, height:80, color:clear, borderColor:green, dashed:true}).centerReg(targets).loc(455, 170).expand(0).cur(), //phone
+		new Rectangle({width:150, height:130, color:clear, borderColor:purple, dashed:true}).centerReg(targets).loc(1140, 530).expand(0).cur(), // tablet
+    	new Rectangle({width:120,height:100,color:clear, borderColor:pink, dashed:true}).centerReg(targets).loc(840, 40).expand(0).cur(), // webcamera
+		new Rectangle({width:50,height:70,color:clear, borderColor:"green", dashed:true}).centerReg(targets).loc(875, 170).expand(0).cur(),
+		new Rectangle({width:120,height:200,color:clear, borderColor:"black", dashed:true}).centerReg(targets).loc(980, 190).expand(0).cur(), // koelkast scherm
+    	// new Rectangle({width:120,height:500,color:clear, borderColor:"black", dashed:true}).centerReg(targets).loc(980, 190).expand(0).cur() // koelkast
+    	new Rectangle({width:150, height:100, color:clear, borderColor:"green", dashed:true}).centerReg(targets).loc(1180, 260).expand(0).cur(), // verdeel station
+    	new Rectangle({width:200, height:100, color:clear, borderColor:"green", dashed:true}).centerReg(targets).loc(520, 500).expand(0).cur() // verdeel station
+	];
+   
+	//targetsList[1].tap(()=>{new Aud(bootaudio).play()})
+	targetsList[0].sound = "babyfooncamera";
+	targetsList[1].sound = "telefoon"; //smartphone
+	targetsList[2].sound = "tablet"; //sandcastleaudio
+  targetsList[3].sound = "camera"; //sandcastleaudio
+  targetsList[4].sound = "scherm koelkast"; //sandcastleaudio
+	targetsList[5].sound = "laptop"; //sandcastleaudio
+ targetsList[6].sound = "oplaadstation"; //sandcastleaudio
+	// targets.cur().on("mousedown", e=>{
+	// 	//e.target.sound.play({loop:false, loopCount:0});
+	// speech.talk(e.target.sound) })
+	// });
+    
+//     targets.loop((target)=> { target.on("pressdown", ()=>{
+//       speech.talk(target.sound) })
+               
+// 	});
+	
+	// set up the match
+	loop(objectsList,  (obj, i)=> {
+		obj.match = targets.getChildAt(i);
+	});
+	
+ 
+  objectsList[0].sound = "babyfooncamera",
+	objectsList[1].sound = "telefoon";
+	objectsList[2].sound = "tablet";
+    objectsList[3].sound = "camera";
+    objectsList[4].sound = "scherm koelkast";
+  objectsList[4].sound = "verdeelstation";
+
+  
+
+  
+	// randomize position using shuffle 
+	var objects = new Tile(series(shuffle(objectsList)), 7, 1, 20)
+	.drag()
+	.pos(50,30,LEFT,BOTTOM);
+
+
+///////////////////////////////////////////
+    
+ 
+    
+    
+  //   /// here all object will become some size
+    objects.loop((item)=> {
+      item.on("pressdown", ()=>{ // so it works also when dragging picture
+   // item.sound.play({loop:false, loopCount:0}) })
+    speech.talk(item.sound);
+    //F.off(item.sca(1));
+  	item.sca(1.2);
+      })
+     });
+  
+	// objects.items.on("mousedown", e=>{
+	// 	e.target.sound.play({loop:true, loopCount:2});
+	// });
+	
+	
+	STYLE = {};
+
+	// Record start locations to snap back to
+	objects.loop(obj=> {
+		obj.startX = obj.x;
+		obj.startY = obj.y;
+	})
+	
+	// Create the shape where we draw the line
+	var shape = new Shape().addTo().ord(-1);
+
+	// Record which shape has been picked up
+	// This gets used in the Ticker
+	var currentShape;
+	objects.on("mousedown",  e=> {
+		currentShape = e.target;
+	});
+    
+    
+	 
+      
+    
+	objects.on("pressup",  e=> {
+
+		// Test to see if object is hitting target
+     //currentShape = e.target.sca(2.6);
+   // objects[1] = e.target.sca(2.6);
+    	
+     
+		var obj = e.target;
+   
+    
+		if (obj.hitTestBounds(obj.match)) { // if match
+speech.talk("bravo");
+			obj.loc(obj.match)//.noMouse(); // don't let user pick up object
+			//obj.match.removeFrom();
+			emitter.loc(obj).spurt(10);
+			//shape.c();
+			currentShape = null;
+      obj.sca(1.4);
+      
+      
+// if (obj[1].hitTestBounds(targets[1].match)) {
+//   objects[1].sca(2);
+//   S.update()
+// }
+      
+//       obj.on("pressup", ()=>{ 
+      // obj.siz(null,100);
+//       })
+   
+      
+    
+      
+			if (targets.numChildren==0) { // end game
+				objects.animate({
+					props:{scale:1.4},
+					time:.2,
+					rewind:true,
+					loop:true, // was true before
+					loopCount:1, // was 2 before
+					sequence:100
+				});
+				
+				replay.addTo().alp(0).animate({
+					wait:1,
+					props:{alpha:1}
+				});
+			new Aud("dathebjegoedgedaan.mp3").play({wait:1});
+			}
+
+		} else { // snap back - no match
+
+			objects.noMouse();
+			obj.animate({
+				props:{x:obj.startX, y:obj.startY},
+				time:.5,
+				ease:"elasticOut",
+				call:function () {
+					objects.mouse();
+					currentShape = null;
+				}
+			});
+
+		}
+	});
+
+	var emitter = new Emitter({obj:new Circle(20,[pink,purple],dark), startPaused:true});
+
+	var replay = new Button({
+		label:"Goed gedaan, speel opnieuw!",
+		backgroundColor:green,
+		rollBackgroundColor:pink,
+		corner:0,
+		width: 500
+	})
+		.pos(0,100,CENTER,CENTER)
+		.removeFrom()
+		.tap(()=> {
+			replay.removeFrom();
+
+			// restarting is always tricky
+			// you could just use zgo("matchingGame.html")
+     
+			objects.loop(obj=> {
+				obj.animate({
+					props:{x:obj.startX, y:obj.startY},
+					time:.7,
+					ease:"backOut",
+					call:function () {
+						objects.animate({
+							props:{alpha:0},
+							time:1,
+							rewind:true,
+							rewindCall:function() {
+								// get the last starts
+								var starts = [];
+								objects.loop(obj=> {
+									starts.push(obj.startX);
+								});
+								// shuffle them
+								shuffle(starts);
+								// loop through the objects to drag and apply new starts
+								loop(starts, (s, i)=> {
+									objects.getChildAt(i).startX = objects.getChildAt(i).x = s;
+								});
+							}
+						})
+						obj.mouse(); // add mouse control back
+					}
+				});
+			});			
+			loop(targetsList, target=>{
+				target.addTo(targets);
+			})
+		});
+
+
+    
+   
+
+    const shell = new Container(W,H).addTo();
+			var fullscreen = new Button({
+		    width:40,
+		    height:40,
+		    corner:0,
+		    backgroundColor:clear,
+		    rollBackgroundColor:blue,
+		    icon:makeIcon("maximize", dark),
+		    toggleIcon:makeIcon("close", dark)
+		}).expand(40)
+					.addTo(shell)
+					.pos(20,20,RIGHT,TOP);
+			
+				fullscreen.on("click", ()=>{	
+					F.fullscreen(!F.isFullscreen);	
+					fullscreen.text = F.isFullscreen?"":"";
+				});
+				F.on("fullscreenexit", ()=>{
+					fullscreen.text = "";
+					
+        });
+ 
+  F.madeWith({text:"ZIMjs KIDS"}).pos(10,5,RIGHT, BOTTOM).tap(()=>{zgo("https://zimjs.org/slate/view", "_blank")});
+    
+    }) //end F on complete
+  
+}
+       
+        </script>
+    </head>
+    <body>
+      
+    </body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="nl">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/escape3659/css/style.css">
+        <title>escape 3659 M.Sander</title>
+        <script type=module>
+     import "https://zimjs.org/cdn/017/zim_pizzazz"
+     new Frame(FIT, 1920, 1080, white,dark, ready)
+     function ready(){
+
+//   F.zapp_width = 1920;
+// F.zapp_height = 1080;
+// F.zapp_assets(["gf_Chewy"])
+  F.loadAssets(["gf_Chewy",
+                "sander.jpg", "tussenstuk2.png", "deurlinks2", "deurrechts3", 
+                "codegroen.png", "coderesultaat.png",
+                {id:"voormuur", src:"voormuur.png"}
+               ],
+           "https://raw.githubusercontent.com/karelrosseel/meestersander/master/escaperoom/"
+              )
+  F.on("complete",()=>{
+    STYLE = {font:"Chewy"};
+    PATH = "https://raw.githubusercontent.com/karelrosseel/meestersander/master/escaperoom/"
+new Pic("sander.jpg").scaleTo().center().mov(0,0).bot(); //meester sander
+
+let open = false;
+let onOff = true;
+let containerBack = new Container().pos(0, 0);
+let code ="3659"
+
+
+/////// two doors wil open ///////
+  ////////
+let containerBack2 = new Container(W,H).pos(0,0,LEFT,TOP); // necessary to specify the W, H and pos() !!
+
+//   let recblack = new Rectangle({
+//       width:20,
+//       height:400,
+//       color:"#111C26"
+//     }).pos(1360,390).addTo(containerBack2);
+  
+  
+var door1= new Pic({
+    file:"deurlinks.png", // linkse deur
+  }).reg(CENTER).siz(580).pos(365,180, LEFT,TOP, containerBack2);
+  var door2= new Pic({
+      file:"deurrechts3.png", // rechtse deur
+    }).reg(CENTER).siz(600).pos(980,170,LEFT,TOP,containerBack2);
+var backGround= new Pic({
+      file:"voormuur.png", //big background
+    }).pos(0,0,LEFT,TOP,containerBack2).sca(1.5);
+    var between = new Pic({
+      file:"tussenstuk4.png", //big background
+    }).pos(-20,230,CENTER,TOP,containerBack2).sca(1.5);
+
+
+
+// let recLock = new Rectangle({
+//   width:124,
+//   height:195,
+//   color:"#315264"
+// }).pos(600,614).cur();
+  
+  let recLock = new Pic("https://i.imgur.com/bshZazp.png").siz(70)
+ .pos(935,554,LEFT,TOP).cur();
+  
+let containerslot = new Container().pos(0,0).alp(0);
+let rect = new Rectangle({
+  width:240,
+  height:120,
+  color:"#346F7C"
+}).addTo(containerslot).pos(390,100);
+  
+ 
+  
+const imput = new Label({
+    text:"",
+    size:100,
+    color:white,
+  align:CENTER,
+  valign:CENTER
+  }).addTo(containerslot).centerReg().pos(450,130);
+  
+const startCodeLabel = new Label({
+    text: "klik het nummerbord in het midden\nmet de code gaan de deuren openen",
+    size: 60,
+    align: CENTER,
+  color:white
+}).pos(-50, 30, CENTER, TOP).sha()
+
+
+  //dooropen
+    var dooropen = new Aud({
+        file: "https://zimjs.org/assets/powerup.mp3",
+        volume: .5
+    });
+   //false = wrong = click
+    var wrong = new Aud({
+        file: "https://zimjs.org/assets/click.mp3",
+        volume: .5
+    })
+    //buz 
+    var buz = new Aud({
+        file: "https://zimjs.org/assets/static.mp3",
+        volume: .5
+    })
+    
+//lock = clap sound
+  var lock = new Aud({
+        file: "https://zimjs.org/assets/backing.mp3",
+        volume: .5
+    })  
+
+
+
+STYLE = {
+    titleBar: "code invoeren",
+    align: CENTER,
+    close: false,
+    collapse: false
+};
+const keyboard = new Keyboard({
+    labels: imput,
+    numPadOnly: true,
+    numPadDraggable: false,
+    numPadAdvanced: "simple",
+    maxLength: 4,
+});
+
+    const codeLabel = new Label("code\n3659", 100, "Chewy", white);
+    
+recLock.on("click",()=>{
+  recLock.noMouse();
+  startCodeLabel.alp(0);
+  timeout(1.5,()=>{
+  codeLabel.animate({props:{alpha:0},time:1,loop:false, from:true});
+  codeLabel.pos(-60,30,CENTER,TOP);
+    
+    })
+  
+  //containerClock.animate({props:{x:-800,y:280},time:0.8});
+  containerBack2.animate({
+    props:{scale:2,x:-1030,y:-700}
+      });
+
+
+  recLock.animate({
+    props:{scale:1.3,x:770,y:330}
+  });
+ 
+   not.animate({
+    props:{x:-370,y:330}
+  });
+   
+  //robot.alp(0);
+  sander.animate({
+    props:{x:2070,y:530}
+  });
+   board.animate({
+    props:{x:2070,y:630}
+  });
+               //  sander.alp(0);
+  timeout(1,()=>{recLock.alp(0); 
+                 S.update()});
+  
+  timeout(1,()=>{
+    keyboard.showNumPad();
+    keyboard.numPad.mov(-60,-30);
+    containerslot.animate({props:{alpha:1}});
+    
+  
+  });
+});
+  
+
+
+let letterLbls = [];
+let letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+loop(36, i => {
+    let labelL = new Label({
+        text: letters[rand(letters.length - 1)],
+        size: rand(50, 800),
+        bold: true
+
+    });
+    letterLbls.push(labelL);
+});
+
+  
+  
+  // two doors will animate
+  const coderesultaat = new Pic("coderesultaat.png")
+  
+const video = new Vid("https://i.imgur.com/zdNRSeF.mp4", 0, 0)
+  // .center() // using 800x600
+const getin =  new Label("Welkom bij Ontdekpunt..", 120, "Chewy", yellow).reg(LEFT,TOP).sha();
+keyboard.on("enter",()=>{
+    if(imput.text==code){
+      coderesultaat.siz(250).pos(-60,-100,CENTER,CENTER)
+     
+      timeout(2,()=>{
+        
+      })
+      timeout(1,()=>{video.play();
+                    });
+      
+      const countdown = new Label({text:"", size:100, font:"Chewy", color:white}).pos(-50,50,CENTER,TOP)
+      timeout(1.9,()=>{
+      countdown.animate({props:{x:970, y:340, scale:.6}, time:1.2, from:false}); 
+        });
+      
+      var woorden = [ "5", "5", "4", "3", "2", "1", ""];
+//iedere 1 seconde
+// of ieder ZIM VEE values [1,3,6] seconden
+// of tussen een gebied van cijfers [min:1, max:5}
+// of met series( time, time, time ,.. )
+var inter = interval(series[0,.3,.3,.3,.3],
+			obj => { countdown.text = woorden[obj.count % woorden.length]; S.update();
+//if (obj.count >= woorden.length-1) obj.clear()
+}, woorden.length-1);
+S.on("stagemousedown", () => { inter.pause(!inter.paused)});
+      
+        //soundClap();
+      //lock.play()
+       
+      codeLabel.alp(0);
+      // video.pause(!video.videoPaused);
+  
+         rect.animate({props:{color:green}})
+        timeout(2,()=>{
+        containerBack2.animate({
+          props:{scale:1,x:0,y:0}
+        });
+          
+          timeout(4,()=>{
+         between.animate({
+          props:{alpha:0},
+           time:2
+        });
+        coderesultaat.animate({props:{alpha:0},time:1,from:false});
+          
+            })
+
+                
+        
+   not.animate({
+    props:{x:190,y:270}
+  });
+  
+           sander.animate({
+    props:{x:1470,y:530}
+  });
+   board.animate({
+    props:{x:1570,y:430}
+  });
+          
+           coderesultaat.animate({props:{width:80, x:920, y:520}, time:1});//.pos(0,0,CENTER,CENTER)
+          
+        keyboard.hideNumPad();
+        containerslot.alp(0);
+        //containerClock.animate({props:{x:250,y:480},time:1});
+        })
+     
+        timeout(6,()=>{
+
+          //soundGood();
+         dooropen.play();
+          
+           timeout(1, () => {
+               getin.pos(0, 30, CENTER, TOP);
+           });
+          stop();
+          door1.animate({
+            props:{x:150}
+          });
+          door2.animate({
+            props:{x:1800}
+          });
+          
+        
+          
+          timeout(3,()=>{
+containerBack2.animate({props:{alpha:0},time:1,from:false});
+            getin.text="MeesterSander.nl bij Ontdekpunt.nl";
+            getin.color=blue.darken(.5);
+            getin.animate({props:{x:300}, time:1});
+            new Rectangle(1940,200,yellow).ske(30).pos(-200,0).bot().ord(3).sha();
+            sander.alp(0);
+
+      
+            board.alp(0);
+            not.alp(0);
+            new Button({width:60,height:60,label:"", icon:makeIcon("rotate",white)}).pos(10,10,LEFT,BOTTOM).tap(()=>{window.location.reload("Refresh")});
+          })
+        });
+
+    }else{
+       rect.animate({props:{color:"#FF0000"}})
+       //soundFalse();
+      wrong.play();
+      
+       timeout(2,()=>{
+           rect.animate({props:{color:"#346F7C"}});
+           keyboard.clearText();
+           imput.text="";
+       });
+    }
+});
+
+keyboard.on("keydown",()=>{
+    rect.animate({props:{color:"#346F7C"}});
+    wrong.play(); //click sound
+});
+  
+
+
+
+
+  //const logosander = new Pic("https://i.imgur.com/KpOexst.png").siz(220).pos(50,350,LEFT,TOP);
+  const zIcon = F.madeWith({text:"ZIMjs kids SLATE", color:white}).pos(10,10,RIGHT,BOTTOM).tap(()=>{zgo("https://zimjs.org/kids/slate", "_blank")});
+  
+  
+  
+  
+  const board = new Pic("https://i.imgur.com/9Hn9NGA.png").siz(600).pos(-50,50,RIGHT,BOTTOM).sha().drag({axis:HORIZONTAL, boundary:S, onTop:false});
+  const sander = new Pic("https://i.imgur.com/WsT7kbM.png").siz(500).pos(10,0,RIGHT,BOTTOM).sha()
+  sander.drag({axis:HORIZONTAL, boundary:S});
+ // const not = new Pic("https://i.imgur.com/QjuYzCP.png").pos(100,200,LEFT,CENTER);
+  const not = new Label("Welkom, bij\nMeester Sander.nl\nOpen jij de deur?\n\nCode 3659\n\nOntdekPunt.nl\nin Meppel (NL)\n\nlocatie\nin school\nDe Spil\nin Meppel", 50,"Chewy", "#bfe5fa").pos(20,20,LEFT,CENTER);
+    
+       const shell = new Container(W, H).addTo();
+    var fullscreen = new Button({
+      width: 40,
+      height: 40,
+      corner: 0,
+      backgroundColor: clear,
+      rollBackgroundColor: pink,
+      icon: makeIcon("maximize", white),
+      toggleIcon: makeIcon("close", grey)
+    })
+      .addTo(shell)
+      .pos(20, 20, RIGHT, TOP);
+
+    fullscreen.on("click", () => {
+      F.fullscreen(!F.isFullscreen);
+    });
+    F.on("fullscreenexit", () => {});  
+	
+  
+    
+  }); // end of F on complete
+  }
+        </script>
+    </head>
+    <body>
+      
+    </body>
+</html>
